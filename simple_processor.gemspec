@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ['David Saenz Tagarro']
   spec.email         = ['david.saenz.tagarro@gmail.com']
   spec.summary       = %q{Rails data batch migrations made easy.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
+  spec.description   = %q{Rails data batch migrations made easy.}
   spec.homepage      = ''
   spec.license       = 'MIT'
 
