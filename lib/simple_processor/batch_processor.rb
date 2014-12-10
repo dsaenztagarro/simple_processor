@@ -1,3 +1,5 @@
+require 'ruby-progressbar'
+
 module SimpleProcessor
   # Class for processing records in batches
   class BatchProcessor
@@ -36,7 +38,6 @@ module SimpleProcessor
     private
 
     def self.handlers_module
-      binding.pry
       path_list = to_a.each_with_index.map do |x, i|
         x if i < index_processors_module
       end

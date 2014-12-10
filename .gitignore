@@ -21,3 +21,4 @@ tmp
 *.a
 mkmf.log
 bundler_stubs
+spec/support/dummy_app/config/database.yml

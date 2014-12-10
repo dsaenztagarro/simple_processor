@@ -3,8 +3,9 @@ rvm:
 - 2.1.5
 - 1.9.3
 before_script:
+- export DUMMY_APP_PATH='spec/support/dummy_app'
 - psql -c 'create database simple_processor_test;' -U postgres
-- cp config/database.yml.travis config/database.yml
+- cp $DUMMY_APP_PATH/config/database.yml.travis $DUMMY_APP_PATH/config/database.yml
 script:
 - export TRAVIS=true
 - export RACK_ENV=test
@@ -15,4 +16,4 @@ addons:
   postgresql: "9.3"
 addons:
   code_climate:
-      repo_token:
+      repo_token: 9351e5982d9f71080d0a38cf7bc146b4ec56255fcdc2859a2189c8b274010a9a

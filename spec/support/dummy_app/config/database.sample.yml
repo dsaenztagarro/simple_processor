@@ -1,0 +1,10 @@
+development: &default
+  adapter: postgresql
+  database: simple_processor_development
+  username: development
+  password: development
+  host: localhost
+
+test:
+  <<: *default
+  database: simple_processor_test
