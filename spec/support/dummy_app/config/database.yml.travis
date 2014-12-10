@@ -1,0 +1,5 @@
+test:
+  adapter: postgresql
+  database: simple_processor_test
+  username: postgres
+  host: localhost

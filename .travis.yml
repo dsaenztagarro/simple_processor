@@ -2,7 +2,17 @@ language: ruby
 rvm:
 - 2.1.5
 - 1.9.3
-script: rspec spec
+before_script:
+- psql -c 'create database simple_processor_test;' -U postgres
+- cp config/database.yml.travis config/database.yml
+script:
+- export TRAVIS=true
+- export RACK_ENV=test
+- bundle exec rake db:migrate --trace
+- bundle exec rake db:test:prepare
+- bundle exec rake
+addons:
+  postgresql: "9.3"
 addons:
   code_climate:
       repo_token:

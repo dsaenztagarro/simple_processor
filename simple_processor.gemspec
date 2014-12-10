@@ -27,5 +27,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'reek'
   spec.add_development_dependency 'rspec'
   spec.add_development_dependency 'rubocop'
+  spec.add_development_dependency 'sinatra'
+  spec.add_development_dependency 'sinatra-activerecord'
   spec.add_development_dependency 'simplecov'
 end
