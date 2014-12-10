@@ -30,7 +30,54 @@ gem install simple_processor
 
 ## Usage
 
-TODO: Write usage instructions here
+Example of use:
+
+```ruby
+# lib/my_package/processors/concept_processor.rb
+module MyPackage
+  module Processors
+    class ConceptProcessor < SimpleProcessor::BatchProcessor
+      processor_handlers :process1_handler, :process2_handler
+      processor_model Concept
+    end
+  end
+end
+
+# lib/my_package/handlers/concept_handler.rb
+module MyPackage
+  module Handlers
+    class Process1Handler
+      def apply(model)
+        # Your business logic!
+      end
+    end
+
+    class Process2Handler
+      def apply(model)
+        # Your business logic!
+      end
+    end
+  end
+end
+```
+
+
+```ruby
+# lib/tasks/update_concepts.rake (Option 1: rake task)
+task :update_concepts => :environment do
+  MyPackage::Processors::ConceptProcessor.new.run
+end
+
+# db/data/XXXXXXX_update_concepts.rb (Option 2: data_migration)
+class DestroyDuplicateCrops < ActiveRecord::Migration
+  def self.up
+    ::MyPackage::Processors::ConceptProcessor.new(ar_migration: self).run
+  end
+  def self.down
+    raise IrreversibleMigration
+  end
+end
+```
 
 ## Contributing
 
