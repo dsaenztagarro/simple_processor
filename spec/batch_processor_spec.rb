@@ -12,5 +12,11 @@ describe 'SimpleProcessor::BatchProcessor' do
       end
       Processors::ConceptProcessor.new.run
     end
+
+    it 'raises an error on unknown handler class' do
+      expect {
+        Hola::Processors::InvalidHandlerProcessor.new.run
+      }.to raise_error
+    end
   end
 end

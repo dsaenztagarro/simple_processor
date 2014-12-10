@@ -3,13 +3,11 @@ require 'ruby-progressbar'
 module SimpleProcessor
   # Class for processing records in batches
   class BatchProcessor
-    def self.processor_handlers(*handlers)
-      handler_instances = handlers.map do |handler|
-        handlers_module.const_get(handler.to_s.camelize).new
-      end
-
+    def self.processor_handlers(*handlers_args)
       define_method :handlers do
-        handler_instances
+        @handlers ||= handlers_args.map do |handler|
+          handlers_module.const_get(handler.to_s.camelize).new
+        end
       end
     end
 
@@ -37,13 +35,12 @@ module SimpleProcessor
 
     private
 
-    def self.handlers_module
-      path_list = to_a.each_with_index.map do |x, i|
-        x if i < index_processors_module
+    def handlers_module
+      klass = self.class
+      path_list = klass.to_a.each_with_index.map do |x, i|
+        x if i < klass.index_processors_module
       end
       path_list.compact.join('::').concat('::Handlers').constantize
-    rescue
-      raise 'Handlers module not found', caller
     end
 
     def self.index_processors_module
