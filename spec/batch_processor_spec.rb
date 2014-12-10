@@ -25,7 +25,7 @@ describe SimpleProcessor::BatchProcessor do
     let(:models) { [double, double, double] }
 
     it 'applies handler on all models' do
-      handlers = [BatchProcessorTest::Handler1, BatchProcessorTest::Handler2]
+      handlers = [Handlers::Process1Handler, Handlers::Process2Handler]
       handlers.product(models).each do |handler, model|
         expect_any_instance_of(handler).to receive(:apply).with(model)
       end
